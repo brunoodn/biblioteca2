@@ -1,0 +1,52 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca - Livros </title>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container">
+        <br>
+        <h1>Livros</h1>
+        <hr>
+        {% bootstrap_messages %}
+        <form class="form" method="post" action="{% url 'livros' %}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            {% buttons %}
+                <button class="btn btn-primary">Cadastrar</button>
+            {% endbuttons %}
+        </form>
+        <br>
+        <hr>
+        <h2>Lista de Livros</h2>
+        <hr>
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col"><a href="{% url 'autores'%}">Autor</a></th>
+                    <th scope="col"><a href="{% url 'editoras'%}">Editora</a></th>
+                    <th scope="col">Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for livro in livros %}
+                <tr>
+                    <td scope="row">{{ livro.id }}</td>
+                    <td scope="row">{{ livro.nome }}</td>
+                    <td scope="row">{{ livro.autor }}</td>
+                    <td scope="row">{{ livro.editora }}</td>
+                    <td scope="row">{{ livro.preco }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% bootstrap_javascript jquery='full' %}
+</body>
+</html>

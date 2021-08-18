@@ -1,0 +1,45 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca - Autores</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container">
+        <h1>Autores</h1>
+        {% bootstrap_messages %}
+        <form method="post" action="{% url 'autores' %}" form="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            {% buttons %}
+                <button class="btn btn-primary">Cadastrar</button>
+            {% endbuttons%}
+        </form>
+        <br>
+        <hr>
+        <h2>Lista de autores</h2>
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                </tr>
+            </thead>
+            {% for autor in autores %}
+            <tbody>
+                <tr>
+                    <td scope="row">{{ autor.id }}</td>
+                    <td scope="row">{{ autor.nome }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+
+
+    </div>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>

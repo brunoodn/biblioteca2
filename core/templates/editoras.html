@@ -1,0 +1,45 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca - Editoras</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container">
+        <h1>Editoras</h1>
+        {% bootstrap_messages %}
+        <form class="form" method="post" action="{% url 'editoras'%}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button class="btn btn-primary">Cadastrar</button>
+            {% endbuttons %}
+
+        </form>
+        <br>
+        <hr>
+        <h2>Lista de Editoras</h2>
+        <hr>
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for editora in editoras %}
+                <tr>
+                    <td scope="row">{{ editora.id }}</td>
+                    <td scope="row">{{ editora.nome }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>
